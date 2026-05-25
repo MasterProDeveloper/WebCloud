@@ -1,33 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useState } from 'react';
+import { useStore } from './store';
+import FileExplorer from './components/FileExplorer';
+import Editor from './components/Editor';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { currentFile, fileContent, setFileContent } = useStore();
 
   return (
     <>
       <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+        <div className="splitter">
+          <div className="splitter-pane left">
+            <FileExplorer />
+          </div>
+          <div className="splitter-pane right">
+            <Editor 
+              fileContent={fileContent} 
+              onContentChange={setFileContent} 
+              currentFile={currentFile} 
+            />
+          </div>
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
       </section>
 
       <div className="ticks"></div>
@@ -42,13 +36,13 @@ function App() {
           <ul>
             <li>
               <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
+                <img className="logo" src={import('./assets/vite.svg')} alt="" />
                 Explore Vite
               </a>
             </li>
             <li>
               <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
+                <img className="button-icon" src={import('./assets/react.svg')} alt="" />
                 Learn more
               </a>
             </li>
@@ -116,7 +110,7 @@ function App() {
       <div className="ticks"></div>
       <section id="spacer"></section>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
