@@ -1,10 +1,5 @@
 import { create } from 'zustand'
 
-export interface FileNode {
-  path: string
-  content: string
-}
-
 interface StoreState {
   files: Record<string, string>
   currentFile: string | null
