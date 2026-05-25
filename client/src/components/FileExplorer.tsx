@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef, MouseEvent } from 'react';
 import { useStore } from '../store';
-import { io, Socket } from 'socket.io-client';
 import {
   TreeView,
   useTree,
