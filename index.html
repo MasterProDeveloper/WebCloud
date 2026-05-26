@@ -3,151 +3,179 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lumora Studio</title>
-    <link rel="preconnect" href="https://images.unsplash.com" />
+    <meta
+      name="description"
+      content="A browser-based AI website builder with project management, file editing, live preview, n8n automation hooks, and Netlify-ready output."
+    />
+    <title>ForgeAI Website Builder</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header class="site-header" data-glass>
-      <a class="brand" href="#" aria-label="Lumora Studio home">
-        <span class="brand-mark"></span>
-        <span>Lumora</span>
-      </a>
-      <nav class="main-nav" aria-label="Primary navigation">
-        <a href="#work">Work</a>
-        <a href="#services">Services</a>
-        <a href="#studio">Studio</a>
-      </nav>
-      <a class="header-action" href="#contact">Start Project</a>
-    </header>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Project navigation">
+        <a class="brand" href="#" aria-label="ForgeAI dashboard">
+          <span class="brand-mark"></span>
+          <span>ForgeAI</span>
+        </a>
 
-    <main>
-      <section class="hero" aria-label="Lumora creative studio introduction">
-        <div class="hero-media" aria-hidden="true"></div>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-          <p class="eyebrow">Digital experiences with atmosphere</p>
-          <h1>Design that feels alive from the first click.</h1>
-          <p class="hero-copy">
-            Lumora crafts cinematic product websites, immersive launches, and
-            refined brand systems for teams that want their web presence to
-            feel unmistakable.
-          </p>
-          <div class="hero-actions">
-            <a class="button primary" href="#work">View Work</a>
-            <a class="button secondary" href="#services">Explore Services</a>
+        <button class="new-project" id="newProjectBtn" type="button">
+          <span aria-hidden="true">+</span>
+          New Project
+        </button>
+
+        <section class="panel">
+          <div class="panel-title">
+            <span>Projects</span>
+            <button class="icon-button" id="exportProjectBtn" type="button" title="Export current project">
+              <span aria-hidden="true">⇩</span>
+            </button>
           </div>
-        </div>
-        <aside class="hero-panel" aria-label="Studio snapshot">
+          <div class="project-list" id="projectList"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-title">
+            <span>n8n Agent</span>
+            <span class="status-dot" id="agentStatus" title="Agent status"></span>
+          </div>
+          <label class="field-label" for="webhookInput">Webhook URL</label>
+          <input
+            class="text-field"
+            id="webhookInput"
+            type="url"
+            autocomplete="off"
+            placeholder="https://n8n.example.com/webhook/site-agent"
+          />
+          <button class="secondary-action" id="saveWebhookBtn" type="button">Save Webhook</button>
+        </section>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
           <div>
-            <span class="panel-number">34</span>
-            <span class="panel-label">launches shipped</span>
+            <p class="eyebrow">AI Website Builder</p>
+            <h1 id="projectTitle">Project</h1>
           </div>
-          <div>
-            <span class="panel-number">8.7M</span>
-            <span class="panel-label">visitors designed for</span>
+          <div class="topbar-actions">
+            <button class="ghost-action" id="sendToAgentBtn" type="button">Send to n8n</button>
+            <button class="primary-action" id="deployBtn" type="button">Deploy Netlify</button>
           </div>
-        </aside>
-      </section>
+        </header>
 
-      <section class="intro-band" id="work">
-        <div class="section-heading">
-          <p class="eyebrow">Selected direction</p>
-          <h2>Sharp identities for ambitious products.</h2>
-        </div>
-        <div class="showcase-grid">
-          <article class="project-card project-one">
-            <div class="project-image"></div>
-            <div class="project-copy">
-              <span>Launch System</span>
-              <h3>Vanta Air</h3>
-              <p>Editorial launch site, booking flow, and cinematic motion language.</p>
-            </div>
-          </article>
-          <article class="project-card project-two">
-            <div class="project-image"></div>
-            <div class="project-copy">
-              <span>Commerce Experience</span>
-              <h3>Oro Atelier</h3>
-              <p>Luxury catalog experience with tactile product browsing and checkout.</p>
-            </div>
-          </article>
-          <article class="project-card project-three">
-            <div class="project-image"></div>
-            <div class="project-copy">
-              <span>Interactive Platform</span>
-              <h3>Northline</h3>
-              <p>Data-rich operating dashboard with a calm, high-trust interface.</p>
-            </div>
-          </article>
-        </div>
-      </section>
+        <section class="tool-grid" aria-label="AI tools">
+          <button class="ai-tool is-active" data-tool="generate" type="button">
+            <span>Generate Site</span>
+            <small>Ask n8n to create or expand files</small>
+          </button>
+          <button class="ai-tool" data-tool="terminal" type="button">
+            <span>Run Terminal</span>
+            <small>Send commands to your agent</small>
+          </button>
+          <button class="ai-tool" data-tool="fix" type="button">
+            <span>Fix Errors</span>
+            <small>Package logs and source files</small>
+          </button>
+          <button class="ai-tool" data-tool="deploy" type="button">
+            <span>Deploy</span>
+            <small>Prepare Netlify publish payload</small>
+          </button>
+        </section>
 
-      <section class="services" id="services">
-        <div class="section-heading">
-          <p class="eyebrow">What we build</p>
-          <h2>Complete web experiences, not just pretty pages.</h2>
-        </div>
-        <div class="service-list">
-          <article>
-            <span class="service-index">01</span>
-            <h3>Brand Worlds</h3>
-            <p>Visual identity, art direction, typography, color, and launch-ready systems.</p>
-          </article>
-          <article>
-            <span class="service-index">02</span>
-            <h3>Product Websites</h3>
-            <p>Responsive marketing sites, landing pages, microsites, and conversion flows.</p>
-          </article>
-          <article>
-            <span class="service-index">03</span>
-            <h3>Interface Design</h3>
-            <p>Dashboards, portals, SaaS tools, prototypes, and component libraries.</p>
-          </article>
-          <article>
-            <span class="service-index">04</span>
-            <h3>Motion Systems</h3>
-            <p>Scroll moments, transitions, product storytelling, and interaction details.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="studio" id="studio">
-        <div class="studio-image" role="img" aria-label="Modern studio workspace"></div>
-        <div class="studio-copy">
-          <p class="eyebrow">Studio rhythm</p>
-          <h2>Small team, senior attention, strong visual taste.</h2>
-          <p>
-            Every project starts with a clear strategic direction, then moves
-            quickly through mood, structure, prototype, and production polish.
-            The result is a website that feels considered at every breakpoint.
-          </p>
-          <dl class="stats">
-            <div>
-              <dt>6 wk</dt>
-              <dd>typical launch sprint</dd>
+        <section class="agent-console">
+          <div class="prompt-box">
+            <label for="agentPrompt">Agent instruction</label>
+            <textarea
+              id="agentPrompt"
+              rows="3"
+              placeholder="Build a high-converting SaaS homepage with pricing, FAQ, responsive navigation, and polished animations."
+            ></textarea>
+          </div>
+          <div class="command-box">
+            <label for="commandInput">Terminal command</label>
+            <div class="command-row">
+              <input id="commandInput" type="text" autocomplete="off" value="npm run build" />
+              <button class="primary-action" id="runCommandBtn" type="button">Run</button>
             </div>
-            <div>
-              <dt>92%</dt>
-              <dd>client retention</dd>
-            </div>
-            <div>
-              <dt>14</dt>
-              <dd>industry awards</dd>
-            </div>
-          </dl>
-        </div>
-      </section>
+          </div>
+        </section>
 
-      <section class="contact" id="contact">
-        <div>
-          <p class="eyebrow">Available now</p>
-          <h2>Bring us a product. We will make it feel inevitable.</h2>
-        </div>
-        <a class="button primary" href="mailto:hello@example.com">hello@example.com</a>
-      </section>
-    </main>
+        <section class="builder-grid">
+          <aside class="file-pane" aria-label="File explorer">
+            <div class="pane-header">
+              <h2>Files</h2>
+              <div class="file-actions">
+                <button class="icon-button" id="addFileBtn" type="button" title="Add file">+</button>
+                <button class="icon-button" id="deleteFileBtn" type="button" title="Delete selected file">×</button>
+              </div>
+            </div>
+            <div class="file-tree" id="fileTree"></div>
+          </aside>
 
+          <section class="editor-pane">
+            <div class="pane-header">
+              <div>
+                <h2 id="activeFileName">index.html</h2>
+                <p id="activeFileMeta">HTML document</p>
+              </div>
+              <div class="editor-actions">
+                <button class="ghost-action" id="formatBtn" type="button">Format</button>
+                <button class="primary-action" id="saveFileBtn" type="button">Save</button>
+              </div>
+            </div>
+            <textarea id="codeEditor" spellcheck="false"></textarea>
+          </section>
+
+          <section class="preview-pane">
+            <div class="pane-header">
+              <div>
+                <h2>Preview</h2>
+                <p id="previewMode">Live browser preview</p>
+              </div>
+              <div class="preview-actions">
+                <button class="ghost-action" data-viewport="desktop" type="button">Desktop</button>
+                <button class="ghost-action" data-viewport="mobile" type="button">Mobile</button>
+              </div>
+            </div>
+            <div class="preview-stage desktop" id="previewStage">
+              <iframe id="sitePreview" title="Website preview"></iframe>
+              <pre id="filePreview" hidden></pre>
+            </div>
+          </section>
+        </section>
+
+        <section class="activity-panel">
+          <div class="pane-header">
+            <h2>Agent Messages</h2>
+            <button class="ghost-action" id="clearLogBtn" type="button">Clear</button>
+          </div>
+          <div class="message-log" id="messageLog" aria-live="polite"></div>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal-backdrop" id="projectModal" hidden>
+      <form class="modal" id="projectForm">
+        <h2>Create project</h2>
+        <label>
+          Project name
+          <input id="projectNameInput" type="text" required value="New Website" />
+        </label>
+        <label>
+          Starter type
+          <select id="starterSelect">
+            <option value="saas">SaaS Product</option>
+            <option value="portfolio">Portfolio</option>
+            <option value="store">Online Store</option>
+          </select>
+        </label>
+        <div class="modal-actions">
+          <button class="ghost-action" id="cancelProjectBtn" type="button">Cancel</button>
+          <button class="primary-action" type="submit">Create</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
     <script src="script.js"></script>
   </body>
 </html>
