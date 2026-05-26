@@ -1,0 +1,7 @@
+[
+  { "id": "google", "name": "Google", "base": "https://www.google.com/search", "query": "q" },
+  { "id": "bing", "name": "Bing", "base": "https://www.bing.com/search", "query": "q" },
+  { "id": "duckduckgo", "name": "DuckDuckGo", "base": "https://duckduckgo.com/", "query": "q" },
+  { "id": "brave", "name": "Brave", "base": "https://search.brave.com/search", "query": "q" },
+  { "id": "yahoo", "name": "Yahoo", "base": "https://search.yahoo.com/search", "query": "p" }
+]

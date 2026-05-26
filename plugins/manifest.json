@@ -1,0 +1,44 @@
+[
+  {
+    "id": "seo-inspector",
+    "name": "SEO Inspector",
+    "version": "1.0.0",
+    "description": "Analyzes page titles, descriptions, headings, canonical signals, and search snippets.",
+    "permissions": ["activeTab", "pageMetadata"]
+  },
+  {
+    "id": "ad-shield",
+    "name": "Ad Shield",
+    "version": "1.0.0",
+    "description": "Tracks blocked ad and tracker patterns for the current browsing session.",
+    "permissions": ["networkRules"]
+  },
+  {
+    "id": "ai-summarizer",
+    "name": "AI Summarizer",
+    "version": "1.0.0",
+    "description": "Creates local AI summaries and can forward page context to a custom AI endpoint.",
+    "permissions": ["activeTab", "aiEndpoint"]
+  },
+  {
+    "id": "reader-mode",
+    "name": "Reader Mode",
+    "version": "1.0.0",
+    "description": "Creates a clean reading surface for the active URL when the original page blocks embedding.",
+    "permissions": ["activeTab"]
+  },
+  {
+    "id": "dark-reader",
+    "name": "Dark Reader",
+    "version": "1.0.0",
+    "description": "Applies a dark page filter to the browser viewport.",
+    "permissions": ["activeTab", "appearance"]
+  },
+  {
+    "id": "focus-guard",
+    "name": "Focus Guard",
+    "version": "1.0.0",
+    "description": "Hides side panels and gives the web viewport maximum space.",
+    "permissions": ["layout"]
+  }
+]
